@@ -31,11 +31,11 @@ class Post
 
     public static function all() {
 
-        // $files = File::files(resource_path("posts"));
+        return cache() -> rememberForever('posts.all', function() {
 
-    // collect is functionally the same as map_array
-
-        return collect(File::files(resource_path("posts")))
+            // $files = File::files(resource_path("posts"));
+            // collect is functionally the same as map_array
+            return collect(File::files(resource_path("posts")))
             ->map(fn($file) => YamlFrontMatter::parseFile($file))
 
             ->map(fn($document) => new Post(
@@ -45,7 +45,13 @@ class Post
                     $document -> body(),
                     $document -> slug
                 )
-            );
+            )
+
+            ->sortByDesc('date');
+
+        });
+
+        
     }
 
     public static function find($slug) {
