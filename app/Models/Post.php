@@ -5,6 +5,8 @@ namespace App\Models;
 // need this to prevent 'clas File not found"
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+// when Yaml can't be found
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
@@ -29,18 +31,28 @@ class Post
 
     public static function all() {
 
-        $files = File::files(resource_path("posts/"));
+        // $files = File::files(resource_path("posts"));
 
-        return array_map(fn($file) => $file -> getContents(), $files);
+    // collect is functionally the same as map_array
+
+        return collect(File::files(resource_path("posts")))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+
+            ->map(fn($document) => new Post(
+                    $document -> title,
+                    $document -> exerpt,
+                    $document -> date,
+                    $document -> body(),
+                    $document -> slug
+                )
+            );
     }
 
     public static function find($slug) {
 
-        if (! file_exists($path = resource_path("posts/{$slug}.html"))) {
-            throw new ModelNotFoundException();
-        }
+        // $posts = static::all();
 
-        return cache() -> remember("post.{$slug}", 1200, fn() => file_get_contents($path));
+        return static::all() -> firstWhere('slug', $slug);
 
     }
 }
