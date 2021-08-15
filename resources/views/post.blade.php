@@ -1,4 +1,6 @@
 
+<link rel="stylesheet" href="/app.css">
+
 <x-layout>
 
     <article>
