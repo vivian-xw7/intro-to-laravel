@@ -22,16 +22,16 @@ class Post
     public $slug;
 
     public function __construct($title, $exerpt, $date, $body, $slug) {
-        $this -> title = $title;
-        $this -> exerpt = $exerpt;
-        $this -> date = $date;
-        $this -> body = $body;
-        $this -> slug = $slug;
+        $this->title = $title;
+        $this->exerpt = $exerpt;
+        $this->date = $date;
+        $this->body = $body;
+        $this->slug = $slug;
     }
 
     public static function all() {
 
-        return cache() -> rememberForever('posts.all', function() {
+        return cache()->rememberForever('posts.all', function() {
 
             // $files = File::files(resource_path("posts"));
             // collect is functionally the same as map_array
@@ -39,11 +39,11 @@ class Post
             ->map(fn($file) => YamlFrontMatter::parseFile($file))
 
             ->map(fn($document) => new Post(
-                    $document -> title,
-                    $document -> exerpt,
-                    $document -> date,
-                    $document -> body(),
-                    $document -> slug
+                    $document->title,
+                    $document->exerpt,
+                    $document->date,
+                    $document->body(),
+                    $document->slug
                 )
             )
 
