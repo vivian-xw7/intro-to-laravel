@@ -56,7 +56,7 @@ class Post
 
     public static function find($slug) {
 
-        return static::all() -> firstWhere('slug', $slug);
+        return static::all()->firstWhere('slug', $slug);
 
     }
 
