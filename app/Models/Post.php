@@ -9,12 +9,12 @@ class Post extends Model
 {
     use HasFactory;
 
-    // this prevents mass-assignment
     protected $guarded = [];
 
-    // protected $guarded = ['id'];
-
-    // this is the opposite of guarded
-    // protected $fillable = ['title', 'excerpt', 'body'];
+    public function category()
+    {
+        // post belongs to a category
+        return $this->belongsTo(Category::class);
+    }
 
 }
