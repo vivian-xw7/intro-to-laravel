@@ -12,7 +12,8 @@
             </h1>
 
             <p>
-                <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                <!-- reflect the way you speak: the auther of the post instead of the user of the post. -->
+                By <a href="">{{ $post->author->name }}</a> in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
             </p>
 
 

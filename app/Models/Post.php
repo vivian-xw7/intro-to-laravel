@@ -18,9 +18,11 @@ class Post extends Model
     }
 
     // users?
-    public function user()
+    // laravel assumes user() will have a foreign key of user_id. Used in post.blade
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        // So, since we're calling this author, we must use a foreign key of author_id
+        return $this->belongsTo(User::class, 'author_id');
     }
 
 }

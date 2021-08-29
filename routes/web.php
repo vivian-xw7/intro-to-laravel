@@ -10,7 +10,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', function () {
 
     return view('posts', [
-        'posts' => Post::with('category')->get()
+        // latest() orders them with the most recent at the top
+        'posts' => Post::latest()->with('category')->get()
     ]);
 
 });
