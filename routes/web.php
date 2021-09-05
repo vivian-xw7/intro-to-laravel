@@ -9,9 +9,17 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
 
+    // Post::latest()->with('category')->get();
+
+    $posts = Post::latest()->with('category');
+
+    if (request('search')) {
+        $posts->where('title', 'like' . '%' . request('search') . '%');
+    }
+
     return view('posts', [
         // latest() orders them with the most recent at the top
-        'posts' => Post::latest()->with('category')->get(),
+        'posts' => $posts->get(),
 
         'categories' => Category::all()
     ]);
