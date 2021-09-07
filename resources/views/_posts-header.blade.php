@@ -31,6 +31,7 @@
 
                     <x-dropdown-item 
                         href="/categories/{{ $category->slug }}"
+                        {{-- href="/?category{{ $category->slug }}" --}}
 
                         :active="isset($currentCategory) && $currentCategory->is($category)"
                     
