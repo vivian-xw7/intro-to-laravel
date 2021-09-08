@@ -25,7 +25,7 @@ class PostController extends Controller
             // 'posts' => $posts->get(),
             'posts' => Post::latest()->with('category')->filter(request(['search']))->get(),
 
-            'categories' => Category::all()
+            // 'categories' => Category::all()
         ]);
     }
     
