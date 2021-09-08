@@ -23,7 +23,7 @@ class PostController extends Controller
         return view('posts', [
             // latest() orders them with the most recent at the top
             // 'posts' => $posts->get(),
-            'posts' => Post::latest()->with('category')->filter(request(['search']))->get(),
+            'posts' => Post::latest()->with('category')->filter(request(['search', 'category', 'user']))->get(),
 
             'categories' => Category::all(),
             'currentCategory' => Category::where('slug', request('category'))->first()
