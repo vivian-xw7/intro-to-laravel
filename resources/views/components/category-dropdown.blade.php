@@ -22,7 +22,7 @@
 
         <x-dropdown-item 
             {{-- href="/categories/{{ $category->slug }}" --}}
-            href="/?category={{ $category->slug }}"
+            href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}"
 
             {{-- :active="isset($currentCategory) && $currentCategory->is($category)" --}}
             :active='request()->is("categories/{$category->slug}")'
