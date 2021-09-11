@@ -17,9 +17,10 @@ class Post extends Model
         // $posts = Post::latest()->with('category');
 
         $query->when($filters['search'] ?? false, fn ($query, $search) =>
-            $query
-                ->where('title', 'like' , '%' . $search . '%')
+            $query->where(fn($query) =>
+                $query->where('title', 'like' , '%' . $search . '%')
                 ->orWhere('body', 'like' , '%' . $search . '%')
+            )
         );
 
         $query->when($filters['category'] ?? false, fn ($query, $category) =>
