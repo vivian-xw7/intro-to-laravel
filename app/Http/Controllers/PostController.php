@@ -33,7 +33,7 @@ class PostController extends Controller
             'posts' => Post::latest()->with('category')->filter(request(['search', 'category', 'user']))->get(),
 
             'categories' => Category::all(),
-            'currentCategory' => Category::where('slug', request('category'))->paginate(6)
+            'currentCategory' => Category::where('slug', request('category'))->paginate(6)->withQueryString()
         ]);
     }
     
