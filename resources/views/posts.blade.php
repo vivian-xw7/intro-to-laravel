@@ -11,7 +11,7 @@
 
             <x-posts-grid :posts="$posts" />
 
-            {{ $posts->links() }}
+            {{-- {{ $posts->links() }} --}}
 
         @else
 
