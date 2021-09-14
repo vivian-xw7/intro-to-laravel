@@ -16,21 +16,22 @@ class Post extends Model
 
         // $posts = Post::latest()->with('category');
 
-        $query->when($filters['search'] ?? false, fn ($query, $search) =>
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+
             $query->where(fn($query) =>
-                $query->where('title', 'like' , '%' . $search . '%')
-                ->orWhere('body', 'like' , '%' . $search . '%')
+                $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('body', 'like', '%' . $search . '%')
             )
         );
 
-        $query->when($filters['category'] ?? false, fn ($query, $category) =>
+        $query->when($filters['category'] ?? false, fn($query, $category) =>
 
             $query->whereHas('category', fn ($query) => 
                 $query->where('slug', $category)
             )
         );
 
-        $query->when($filters['user'] ?? false, fn ($query, $user) =>
+        $query->when($filters['user'] ?? false, fn($query, $user) =>
 
             $query->whereHas('user', fn ($query) => 
                 $query->where('username', $user)
