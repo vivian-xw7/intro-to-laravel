@@ -10,31 +10,17 @@ class PostController extends Controller
 {
     public function index()
     {
-        // Post::latest()->with('category')->get();
-
-        // $posts = Post::latest()->with('category');
-
-        // if (request('search')) {
-        //     $posts
-        //         ->where('title', 'like' , '%' . request('search') . '%')
-        //         ->orWhere('body', 'like' , '%' . request('search') . '%');
-        // }
 
         return view('posts', [
-            // latest() orders them with the most recent at the top
-            // 'posts' => $posts->get(),
-            'posts' => Post::latest()->with('category')->filter(request(['search', 'category', 'user']))->get(),
+
+            'posts' => Post::latest()->with('category')->filter(
+                request(['search', 'category', 'user'])
+            )->get(),
 
             'categories' => Category::all(),
             'currentCategory' => Category::where('slug', request('category'))->first()
         ]);
 
-        // return view('posts', [
-        //     'posts' => Post::latest()->with('category')->filter(request(['search', 'category', 'user']))->get(),
-
-        //     'categories' => Category::all(),
-        //     'currentCategory' => Category::where('slug', request('category'))->paginate(6)->withQueryString()
-        // ]);
     }
     
     public function show (Post $post)
