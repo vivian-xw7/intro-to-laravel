@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Postcontroller;
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
