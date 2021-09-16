@@ -11,11 +11,11 @@ class PostController extends Controller
     public function index()
     {
 
-        return view('posts', [
+        return view('posts.index', [
 
             'posts' => Post::latest()->with('category')->filter(
                 request(['search', 'category', 'user'])
-            )->get(),
+            )->paginate(6)->withQueryString(),
 
             'categories' => Category::all(),
             'currentCategory' => Category::where('slug', request('category'))->first()
@@ -26,7 +26,7 @@ class PostController extends Controller
     public function show (Post $post)
     {
         // find post by its slug and pass it to a view call 'post'
-        return view('post', [
+        return view('posts.show', [
             'post' => $post->load(['category'])
         ]);
     }

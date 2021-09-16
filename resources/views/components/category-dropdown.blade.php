@@ -13,22 +13,18 @@
     </x-slot>
 
 
-    <x-dropdown-item href="/" 
+    <x-dropdown-item 
+        href="/?{{ http_build_query(request()->except('category', 'page')) }}" 
         :active="request()->routeIs('home')"
     >All</x-dropdown-item>
     
 
     @foreach ($categories as $category)
 
-        {{-- {{ isset($currentCategory) && $currentCategory->id == $category->id ? "bg-blue-500 text-white" : "" }} --}}
-
         <x-dropdown-item 
-            {{-- href="/categories/{{ $category->slug }}" --}}
+            {{-- except() lets you exclude certain things --}}
+            href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
 
-            {{-- I end up with a URL like: http://127.0.0.1:8000/?category=aut-totam-id-deleniti-esse-ad& --}}
-            href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}"
-
-            {{-- :active="isset($currentCategory) && $currentCategory->is($category)" --}}
             :active="request()->is('categories/{$category->slug}')"
 
         >{{ ucwords($category->name) }}</x-dropdown-item>
