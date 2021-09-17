@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
+
+// everything in here is connected to the controllers
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
@@ -18,4 +21,8 @@ Route::get('/authors/{user:username}', function(User $user) {
         'posts' => $user->posts
     ]);
 });
+
+Route::get('register', [RegisterController::class, 'create']);
+
+Route::post('register', [RegisterController::class, 'store']);
 
