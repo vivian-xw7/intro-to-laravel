@@ -26,7 +26,9 @@ class RegisterController extends Controller
         // if request succeeds, you should see this.
         // dd("success validation succeeded");
 
-        User::create($attributes);
+        $user = User::create($attributes);
+
+        auth()->login($user);
 
         session()->flash('success', 'Your account has been created.');
 
