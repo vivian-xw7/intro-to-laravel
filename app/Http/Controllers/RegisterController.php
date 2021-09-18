@@ -21,6 +21,8 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8']
         ]);
 
+        $attributes['password'] = bcrypt($attributes['password']);
+
         // if request succeeds, you should see this.
         // dd("success validation succeeded");
 
