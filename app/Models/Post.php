@@ -41,6 +41,12 @@ class Post extends Model
 
     }
 
+    public function comments()
+    {
+        // a post has many comments
+        return $this->hasMany(Comment::class);
+    }
+
     public function category()
     {
         // post belongs to a category
