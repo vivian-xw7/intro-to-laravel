@@ -55,27 +55,31 @@
 
             <section class="col-span-8 col-start-5 mt-10 space-y-6"> {{-- styles not working --}}
 
-                <form method="POST" action="" class="flex border border-gray-200 p-6 rounded-xl space-x-4">
-                    @csrf
+                <x-panel>
 
-                    <header class="flex items-center">
-                        <img src="http://i.pravatar.cc/60" alt="" width="40" height="40" class="rounded-full">
-                        <h2 class="ml-4">Leave a comment</h2>
-                    </header>
+                    <form method="POST" action="" class="#">
+                        @csrf
+    
+                        <header class="flex items-center">
+                            <img src="http://i.pravatar.cc/60" alt="" width="40" height="40" class="rounded-full">
+                            <h2 class="ml-4">Leave a comment</h2>
+                        </header>
+    
+                        <div class="mt-6">
+                            <textarea name="body" class="w-full text-sm focus:outline-none focus:ring" placeholder="Say something..." id="" rows="5"></textarea>
+                        </div>
+    
+                        <div class="flex justify-end mt-6 pt-6 border-t border-gray-200 pt-6">
+                            <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600">Post</button>
+                        </div>
+    
+                    </form>
+    
+                    @foreach ($post->comments as $comment)
+                        <x-post-comment :comment="$comment" />
+                    @endforeach
 
-                    <div class="mt-6">
-                        <textarea name="body" class="w-full text-sm focus:outline-none focus:ring" placeholder="Say something..." id="" rows="5"></textarea>
-                    </div>
-
-                    <div class="flex justify-end mt-6 pt-6 border-t border-gray-200 pt-6">
-                        <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600">Post</button>
-                    </div>
-
-                </form>
-
-                @foreach ($post->comments as $comment)
-                    <x-post-comment :comment="$comment" />
-                @endforeach
+                </x-panel>
 
             </section>
 
