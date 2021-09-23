@@ -57,7 +57,7 @@
 
                 <x-panel>
 
-                    <form method="POST" action="" class="#">
+                    <form method="POST" action="" class="/posts/{{ $post->slug }}/comments">
                         @csrf
     
                         <header class="flex items-center">
