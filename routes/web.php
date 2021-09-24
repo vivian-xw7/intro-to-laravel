@@ -19,9 +19,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
-
 // because we are finding the post in post:slug, we need to pass Post as $post in show() of the controller
-Route::get('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
+Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
 
 Route::get('/authors/{user:username}', function(User $user) {
     return view('posts', [
