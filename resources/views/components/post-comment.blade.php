@@ -12,7 +12,7 @@
                 <h3 class="font-bold">{{ $comment->user->username }}</h3>
                 <p class="text-xs">
                     Posted
-                    <time>1{{ $comment->created_at }}</time>
+                    <time>{{ $comment->created_at->format('F j, Y, g:i a') }}</time>
                 </p>
             </header>
     
