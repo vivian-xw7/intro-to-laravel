@@ -14,7 +14,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
 
-Route::get('ping', function() {
+Route::post('newsletter', function() {
+
+    request()->validate(['email' => 'required|email']);
 
     $mailchimp = new \MailchimpMarketing\ApiClient();
 
@@ -23,10 +25,18 @@ Route::get('ping', function() {
         'server' => 'us19'
     ]);
 
-    // ping has no parentheses because it's an endpoint
-    $response = $mailchimp->ping->get();
+    try {
+        $response = $mailchimp->lists->addListMember('a0d9eff468', [
+            'email_address' => request('email'),
+            'status' => 'subscribed'
+        ]);
+    } catch (\Exception $e) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email could not be added to our newsletter.'
+        ]);
+    }
 
-    ddd($response);
+    return redirect('/')->with('success', 'You are now subscribed.');
 
 });
 
