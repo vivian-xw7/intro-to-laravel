@@ -14,6 +14,14 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
 
+Route::get('ping', function() {
+
+    
+
+});
+
+
+
 // everything in here is connected to the controllers
 
 Route::get('/', [PostController::class, 'index'])->name('home');
