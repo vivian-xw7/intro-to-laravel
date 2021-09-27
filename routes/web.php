@@ -16,7 +16,17 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('ping', function() {
 
-    
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us19'
+    ]);
+
+    // ping has no parentheses because it's an endpoint
+    $response = $mailchimp->ping->get();
+
+    ddd($response);
 
 });
 
