@@ -4,7 +4,7 @@
 
 use App\Http\Controllers\NewsletterController;
 use Illuminate\Validation\ValidationException;
-use App\Services\Newsletter;
+use App\Services\MailchimpNewsletter;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
