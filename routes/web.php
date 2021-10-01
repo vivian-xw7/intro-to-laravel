@@ -2,6 +2,7 @@
 
 // always import you controllers
 
+use App\Http\Middleware\MustBeAdmin;
 use App\Http\Controllers\NewsletterController;
 use Illuminate\Validation\ValidationException;
 use App\Services\MailchimpNewsletter;
