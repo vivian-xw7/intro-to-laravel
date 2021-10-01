@@ -33,15 +33,6 @@ class PostController extends Controller
 
     public function create ()
     {
-
-        if (auth()->guest()) {
-            abort(403);
-        }
-
-        if (auth()->user()->name != 'Vivian') {
-            abort(403);
-        }
-
         return view('posts.create');
     }
 
