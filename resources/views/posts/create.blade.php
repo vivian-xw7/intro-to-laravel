@@ -17,7 +17,8 @@
                         name="title" 
                         value="{{ old('title') }}"
                         id="title" 
-                        required>
+                        required
+                    >
     
                     @error('title')
                         <p class="text-red-500 text-xs mt-2">{{ message }}</p>
@@ -36,7 +37,8 @@
                         type="text" 
                         name="slug" 
                         id="slug" 
-                        required>
+                        required
+                    >
     
                     @error('slug')
                         <p class="text-red-500 text-xs mt-2">{{ message }}</p>

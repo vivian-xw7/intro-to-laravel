@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use vendor\laravel\framework\src\Illuminate\Validation\Rule;
 // use Illuminate\Validation\Rule;
 // use Illuminate\Contracts\Validation\Rule;
 
@@ -45,7 +46,7 @@ class PostController extends Controller
             'slug' => 'required', // [Rule::unique('posts', 'slug')],
             'excerpt' => 'required',
             'body' => 'body',
-            'category_id' => 'required', // [Rule::exists('categories', 'id')]
+            'category_id' => 'required' // [Rule::exists('categories', 'id')]
         ]);
 
         $attributes['user_id'] = auth()->id();
