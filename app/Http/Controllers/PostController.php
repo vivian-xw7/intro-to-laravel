@@ -45,7 +45,7 @@ class PostController extends Controller
             'title' => 'required',
             'slug' => 'required', // [Rule::unique('posts', 'slug')],
             'excerpt' => 'required',
-            'body' => 'body',
+            'body' => 'required',
             'category_id' => 'required' // [Rule::exists('categories', 'id')]
         ]);
 
