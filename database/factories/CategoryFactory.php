@@ -23,9 +23,10 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        // creates unique category
         return [
-            'name' => $this->faker->word(),
-            'slug' => $this->faker->slug()
+            'name' => $this->faker->unique()->word(),
+            'slug' => $this->faker->unique()->slug()
         ];
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Post;
 use \App\Models\Category;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,17 +18,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        User::truncate();
-        Post::truncate();
+        // For foreign key errors, disable, the re-enable
+        Schema::disableForeignKeyConstraints();
+        $this->command->info('Category count: ' . Category::all()->count());
+
         Category::truncate();
+        Post::truncate();
+        User::truncate();
+        
+        Schema::enableForeignKeyConstraints();
+        $this->command->info('Category count: ' . Category::all()->count());
 
         // To control the name
         $user = User::factory()->create([
             'name' => 'Battling Bard'
-        ]);
+        ])->each(function ($user) {
+            Post::factory()->create([
+              'user_id' => $user->id
+            ]);
+        });
 
-        Post::factory(5)->create([
-            'user_id' => $user->first()->id
+        Post::factory(20)->create([
+            // 'user_id' => $user->first()->id
         ]);
 
         // $users = User::factory(3)->create();
