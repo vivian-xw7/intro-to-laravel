@@ -6,6 +6,7 @@
     <div class="py-6 px-5">
         <div>
             {{--TODO--}}
+            {{-- <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl"> --}}
             <img src="/images/illustration-3.png" alt="Blog Post illustration" class="rounded-xl">
         </div>
 
