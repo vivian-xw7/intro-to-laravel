@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         
         Schema::enableForeignKeyConstraints();
+        // info prints out data, like ddd() or console.log()
         $this->command->info('Category count: ' . Category::all()->count());
 
         // To control the name
