@@ -18,13 +18,8 @@
 
                 <x-form.textarea name="body" />
 
-
-                <div class="mb-6">
-                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700" 
-                        for="category_id"
-                    >
-                        Category
-                    </label>
+                <x-form.field>
+                    <x-form.label name="category" />
     
                     <select name="category_id" id="category_id">
 
@@ -37,11 +32,8 @@
 
                     </select>
     
-                    @error('category')
-                        <p class="text-red-500 text-xs mt-2">{{ message }}</p>
-                    @enderror
-    
-                </div>
+                    <x-form.error name="category" />
+                </x-form.field>
 
                 <x-submit-button>Publish</x-submit-button>
 
