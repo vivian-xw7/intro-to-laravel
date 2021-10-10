@@ -6,8 +6,6 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use vendor\laravel\framework\src\Illuminate\Validation\Rule;
-// use Illuminate\Validation\Rule;
-// use Illuminate\Contracts\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -36,7 +34,7 @@ class PostController extends Controller
 
     public function create ()
     {
-        return view('posts.create');
+        return view('admin.posts.create');
     }
 
     public function store ()

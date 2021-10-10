@@ -2,6 +2,7 @@
 
 // always import you controllers
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Middleware\MustBeAdmin;
 use App\Http\Controllers\NewsletterController;
 use Illuminate\Validation\ValidationException;
@@ -40,6 +41,9 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
+Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
 Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
 Route::post('admin/posts', [PostController::class, 'store'])->middleware('admin');
+
+
 
