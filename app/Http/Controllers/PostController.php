@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use vendor\laravel\framework\src\Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -15,8 +16,8 @@ class PostController extends Controller
         return view('posts.index', [
 
             'posts' => Post::latest()->with('category')->filter(
-                request(['search', 'category', 'user'])
-            )->paginate(6)->withQueryString(),
+                    request(['search', 'category', 'user'])
+                )->paginate(6)->withQueryString(),
 
             'categories' => Category::all(),
             'currentCategory' => Category::where('slug', request('category'))->first()

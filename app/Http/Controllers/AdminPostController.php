@@ -25,9 +25,12 @@ class AdminPostController extends Controller
     public function store()
     {
 
+        $post = new Post();
+
         $attributes = request()->validate([
             'title' => 'required',
-            'thumbnail' => 'required|image',
+            'thumbnail' => $post->exists() ? ['image'] : ['required', 'image'],
+            // 'thumbnail' => 'required|image',
             'slug' => 'required|unique:posts,slug',
             'excerpt' => 'required',
             'body' => 'required',
@@ -51,7 +54,8 @@ class AdminPostController extends Controller
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'thumbnail' => 'image',
+            'thumbnail' => $post->exists() ? ['image'] : ['required', 'image'],
+            // 'thumbnail' => 'image',
             'slug' => 'required', //|unique:posts,slug', // can't find ignore() for this format
             'excerpt' => 'required',
             'body' => 'required',

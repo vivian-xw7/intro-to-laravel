@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Services\Newsletter;
 use App\Services\MailchimpNewsletter;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use MailchimpMarketing\ApiClient;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,5 +40,9 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
         // makes it so you don't have to keep adding
         // protected $guarded = []; into your models.
+
+        Gate::define('admin', function(User $user) {
+            return $user->username == "Vivian";
+        });
     }
 }
