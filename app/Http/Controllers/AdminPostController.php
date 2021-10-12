@@ -46,4 +46,24 @@ class AdminPostController extends Controller
     {
         return view('admin.posts.edit', ['post' => $post]);
     }
+
+    public function update (Post $post)
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => 'image',
+            'slug' => 'required', //|unique:posts,slug', // can't find ignore() for this format
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id' // Does not like this format: [Rule::exists('categories', 'id')]
+        ]);
+
+        if(isset($attributes['thumbnail'])) {
+            $attributes[$thumbnail] = request()->file('thumbnail')->store('thumbnails');
+        }
+
+        $post->update($attributes);
+
+        return back()->with('success', 'Post Updated!');
+    }
 }
