@@ -17,12 +17,12 @@ class AdminPostController extends Controller
         ]);
     }
 
-    public function create ()
+    public function create()
     {
         return view('admin.posts.create');
     }
 
-    public function store ()
+    public function store()
     {
 
         $attributes = request()->validate([
@@ -42,12 +42,12 @@ class AdminPostController extends Controller
         return redirect('/');
     }
 
-    public function edit (Post $post)
+    public function edit(Post $post)
     {
         return view('admin.posts.edit', ['post' => $post]);
     }
 
-    public function update (Post $post)
+    public function update(Post $post)
     {
         $attributes = request()->validate([
             'title' => 'required',
@@ -65,5 +65,12 @@ class AdminPostController extends Controller
         $post->update($attributes);
 
         return back()->with('success', 'Post Updated!');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return back()->with('success', 'Post Deleted!');
     }
 }
